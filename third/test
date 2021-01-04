@@ -1,0 +1,16 @@
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+scope = [
+'https://spreadsheets.google.com/feeds',
+'https://www.googleapis.com/auth/drive',
+]
+json_file_name = 'enddsad-8342d3c8fc5d.json'
+credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file_name, scope)
+gc = gspread.authorize(credentials)
+spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1CRTH6tkjAh-S_RKH8mE3xe7W4lzKjyCDpYAbqJSD5nY/edit#gid=0'
+# 스프레스시트 문서 가져오기
+doc = gc.open_by_url(spreadsheet_url)
+gc1 = doc.worksheet('시트1')
+
+gc2 = gc1.get_all_values()
+print(gc2)
